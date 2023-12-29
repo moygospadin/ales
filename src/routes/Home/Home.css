@@ -10,5 +10,8 @@
 
 .twit {
   font-size: 20px;
-  
+}
+
+.twitRow {
+  display: flex;
 }
