@@ -1,0 +1,14 @@
+.homeContainer {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid red;
+}
+
+.twitContainer {
+  border: 1px solid blue;
+}
+
+.twit {
+  font-size: 20px;
+  
+}
