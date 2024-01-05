@@ -22,17 +22,18 @@ export const EditTwit = ({ twit, isOpen, close }: IProps) => {
         <Button className="closeBtn" onClick={close}>
           x
         </Button>
-        <p>Old title: {twit?.title}</p>
+        <p>Old twit: {twit?.title}</p>
 
         <TextField
           margin="normal"
           required
           fullWidth
           id="title"
-          label="title"
-          name="title"
+          label="twit"
+          name="twit"
           onChange={(e) => setTitle(e.target.value)}
           autoFocus
+          color="primary"
         />
         <Button onClick={handleSubmit}>Submit</Button>
       </div>

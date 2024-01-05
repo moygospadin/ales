@@ -1,11 +1,22 @@
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import "./App.css";
 
-import { CreateTwit, Home, Login, Register } from "./routes";
+import { Footer } from "./components/Footer";
+import { CreateTwit, Home, Login, Profile, Register } from "./routes";
+
+const BaseRoute = () => {
+  return (
+    <>
+      <Outlet />
+      <Footer title="Microblog" description="Thank you for using our app!" />
+    </>
+  );
+};
+
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Outlet />,
+    element: <BaseRoute />,
 
     children: [
       { path: "/home", element: <Home /> },
@@ -18,6 +29,7 @@ const router = createBrowserRouter([
         element: <Register />,
       },
       { path: "/create_twit", element: <CreateTwit /> },
+      { path: "/profile", element: <Profile /> },
     ],
   },
 ]);

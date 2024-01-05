@@ -1,14 +1,11 @@
 import { AxiosInstance } from "axios";
 import { useEffect, useMemo } from "react";
 import { LOCAL_STORAGE } from "../../const";
-import { useComponentUnloadState } from "../../hooks/use-component-unload-state";
 
 import { AxiosHttpClient, HttpClient } from "./http-client";
 import { initializeAxios } from "./initialize-axios";
-
-export function useAxios(baseURL?: string): AxiosInstance {
-  const axios = initializeAxios(baseURL);
-
+const axios = initializeAxios();
+export function useAxios(): AxiosInstance {
   useEffect(() => {
     axios.interceptors.request.use(
       function (config) {
@@ -20,6 +17,8 @@ export function useAxios(baseURL?: string): AxiosInstance {
         return config;
       },
       function (error) {
+        console.log("error", error);
+
         // Do something with request error
         return Promise.reject(error);
       }
@@ -27,7 +26,7 @@ export function useAxios(baseURL?: string): AxiosInstance {
     axios.interceptors.response.use(
       (value) => value,
       (error) => {
-        return error;
+        return Promise.reject(error);
       }
     );
     return () => {
@@ -39,14 +38,12 @@ export function useAxios(baseURL?: string): AxiosInstance {
   return axios;
 }
 
-export function useHttpClient(baseURL?: string): HttpClient {
-  const axios = useAxios(baseURL);
-
-  const componentUnloadState = useComponentUnloadState();
+export function useHttpClient(): HttpClient {
+  const axios = useAxios();
 
   const httpClient = useMemo<AxiosHttpClient>(() => {
-    return new AxiosHttpClient(axios, componentUnloadState);
-  }, [baseURL]);
+    return new AxiosHttpClient(axios);
+  }, []);
 
   return httpClient;
 }

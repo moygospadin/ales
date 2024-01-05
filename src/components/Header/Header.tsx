@@ -11,7 +11,7 @@ export function Header() {
         <Typography
           component="h2"
           variant="h5"
-          color="inherit"
+          color="white"
           align="center"
           noWrap
           sx={{ flex: 1 }}
@@ -25,17 +25,17 @@ export function Header() {
         sx={{ justifyContent: "space-between", overflowX: "auto" }}
       >
         <Link
-          color="inherit"
+          color="#fff"
           noWrap
           variant="body2"
           href={"/create_twit"}
           sx={{ p: 1, flexShrink: 0 }}
         >
-          create twit
+          Create twit
         </Link>
 
         <Link
-          color="inherit"
+          color="#fff"
           noWrap
           variant="body2"
           href={"/login"}
@@ -44,13 +44,22 @@ export function Header() {
           login
         </Link>
         <Link
-          color="inherit"
+          color="#fff"
           noWrap
           variant="body2"
           href={"/register"}
           sx={{ p: 1, flexShrink: 0 }}
         >
           register
+        </Link>
+        <Link
+          color="#fff"
+          noWrap
+          variant="body2"
+          href={"/profile"}
+          sx={{ p: 1, flexShrink: 0 }}
+        >
+          profile
         </Link>
       </Toolbar>
     </React.Fragment>

@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { ITwit } from "../../routes";
 import { useHttpClient } from "../../shared";
 import { EditTwit } from "../EditTwit";
-import { Footer } from "../Footer";
 import { Post } from "../Post";
 import "./Blog.css";
 export function Blog() {
@@ -48,10 +47,6 @@ export function Blog() {
           />
         ))}
       </div>
-      <Footer
-        title="Footer"
-        description="Something here to give the footer a purpose!"
-      />
     </>
   );
 }

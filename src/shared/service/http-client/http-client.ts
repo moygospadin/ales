@@ -5,7 +5,6 @@ import {
   AxiosResponse,
 } from "axios";
 
-import { ComponentUnloadState } from "../../hooks/use-component-unload-state";
 import { HttpRejectInfo } from "./http-reject-info"; // data can be any
 
 export interface HttpRequestOptions {
@@ -30,10 +29,7 @@ export interface HttpClient {
 }
 
 export class AxiosHttpClient implements HttpClient {
-  constructor(
-    private readonly axios: AxiosInstance,
-    private readonly componentUnloadState: ComponentUnloadState
-  ) {}
+  constructor(private readonly axios: AxiosInstance) {}
 
   get<T>(url: string, options?: HttpRequestOptions): Promise<T> {
     return this.tryPerformRequest(
@@ -72,8 +68,6 @@ export class AxiosHttpClient implements HttpClient {
     return new Promise<T>((resolve, reject) => {
       axiosCall()
         .then((response) => {
-          console.log("response", response);
-
           this.handleResponse(response, resolve);
         })
         .catch((error: AxiosError) => {

@@ -1,5 +1,6 @@
 .modalContainer {
-  background-color: tomato;
+  color:black;
+  background-color:#fff;
 }
 .closeBtn {
   color: red;

@@ -10,6 +10,17 @@ interface IProps {
   onDelete: () => void;
   onEdit: () => void;
 }
+
+const formatDate = (date: string) => {
+  const pasedDate = new Date(date);
+  return (
+    pasedDate.getFullYear() +
+    "/" +
+    (pasedDate.getMonth() + 1) +
+    "/" +
+    pasedDate.getDate()
+  );
+};
 export function Post({ twit, onDelete, onEdit }: IProps) {
   return (
     <Grid item xs={12} md={6}>
@@ -20,7 +31,7 @@ export function Post({ twit, onDelete, onEdit }: IProps) {
               {twit.title}
             </Typography>
             <Typography variant="subtitle1" color="text.secondary">
-              {twit.created_at}
+              {formatDate(twit.created_at)}
             </Typography>
             <Typography variant="subtitle1" paragraph>
               description

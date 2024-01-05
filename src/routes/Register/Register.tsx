@@ -1,28 +1,40 @@
+import { TextField } from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Checkbox from "@mui/material/Checkbox";
 import CssBaseline from "@mui/material/CssBaseline";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import TextField from "@mui/material/TextField";
 import * as React from "react";
 
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
+import { useNavigate } from "react-router-dom";
 import { useHttpClient } from "../../shared";
 
 export function Register() {
   const httpClient = useHttpClient();
-
+  const navigate = useNavigate();
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     try {
       event.preventDefault();
       const data = new FormData(event.currentTarget);
-      await httpClient.post<{ access: string; refresh: string }>("register/", {
-        username: data.get("email"),
+      const body = {
+        username: data.get("username"),
         email: data.get("email"),
         password: data.get("password"),
-      });
-    } catch (error) {}
+        sex: "M",
+        country: data.get("country"),
+        age: data.get("age"),
+        date_of_birthday: data.get("date_of_birthday"),
+        first_name: data.get("first_name"),
+        last_name: data.get("last_name"),
+        about: data.get("about"),
+      };
+
+      await httpClient.post<string>("register/", body);
+
+      navigate("/login");
+    } catch (error: any) {}
   };
 
   return (
@@ -50,6 +62,63 @@ export function Register() {
             autoComplete="email"
             autoFocus
           />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="first_name"
+            label="first name"
+            id="first_name"
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="last_name"
+            label="second name"
+            id="last_name"
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="country"
+            label="country"
+            name="country"
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="username"
+            label="user name"
+            id="username"
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="about"
+            label="about"
+            id="about"
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="date_of_birthday"
+            label="birth date"
+            id="date_of_birthday"
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="age"
+            label="age"
+            id="age"
+          />
+
           <TextField
             margin="normal"
             required
